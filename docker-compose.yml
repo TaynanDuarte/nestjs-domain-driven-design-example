@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app:
+    container_name: nestjs-ddd-example
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/app/src
+    environment:
+      MONGODB_CONNECTION_STRING: mongodb://mongoadmin:mongopass@mongodb:27017/nestjs_ddd_db?authSource=admin&readPreference=primary&directConnection=true&ssl=false
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    environment:
+      MONGO_INITDB_DATABASE: nestjs_ddd_db
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin 
+      MONGO_INITDB_ROOT_PASSWORD: mongopass

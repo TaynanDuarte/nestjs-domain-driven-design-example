@@ -1,0 +1,13 @@
+dist
+node_modules
+test
+.eslintrc.js
+.gitignore
+.prettierrc
+docker-compose.yml
+Dockerfile
+README.md
+.dockerignore
+npm-debug.log
+.env.development
+*.http
